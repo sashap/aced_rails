@@ -1,12 +1,13 @@
+
 AcedRails
 =========
 
-This gem is a fork from [ffloyd/aced_rails](https://github.com/ffloyd/aced_rails)  It provide generator and helpers for using [Ajax.org Cloud9 Editor](http://ajaxorg.github.com/ace/) (ACE) in Rails applications. 
+This gem is a fork from [ffloyd/aced_rails](https://github.com/ffloyd/aced_rails)  It provide generator and helpers for using [Ajax.org ACE Editor](http://ajaxorg.github.com/ace/) in Rails applications. 
 
-Changes include:
+Changes from [ffloyd/aced_rails](https://github.com/ffloyd/aced_rails) include:
 
-* updated vendor assets from [ajaxorg/ace](https://github.com/ajaxorg/ace)
-* added initializer support for extensions
+* updateds to latest assets from [ajaxorg/ace](https://github.com/ajaxorg/ace)
+* added initializer support for extensions and addons
 
 Installation
 ------------
