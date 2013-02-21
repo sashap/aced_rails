@@ -1,13 +1,12 @@
 AcedRails
 =========
 
-This gem provide some generators and helpers for using [Ajax.org Cloud9 Editor](http://ajaxorg.github.com/ace/) (ACE) in Rails applications.
+This gem is a fork from [ffloyd/aced_rails](https://github.com/ffloyd/aced_rails)  It provide generator and helpers for using [Ajax.org Cloud9 Editor](http://ajaxorg.github.com/ace/) (ACE) in Rails applications. 
 
-I wrote a little jQuery plugin as part of this gem. It gives coll interface to control basic functions of ACE and integrate ACE into forms without bookmarklet magick and limitations (by default ACE doesn't support textarea).
+Changes include:
 
-This's my first gem, so i'll be pleasure for any comments or pull requests.
-
-My English is bad (terrific, awful etc.), i know. So, i'll be glad to any grammar fixes too. =)
+* updated vendor assets from [ajaxorg/ace](https://github.com/ajaxorg/ace)
+* added initializer support for extensions
 
 Installation
 ------------
@@ -16,35 +15,37 @@ Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'aced_rails'
+    gem 'aced_rails', :git => 'git://github.com/sashap/aced_rails.git'
 
-And then execute:
+Install the gem:
 
     $ bundle
 
-And generate config file:
+Generate config file (config/initializers/aced_rails.rb):
 
-    $ rails g aced_rails:install
+    $ rails g aced_rails:install 
+
+Add aced_tag to the application head after the javascript_include_tag lines: 
+
+```ruby
+  <%= javascript_include_tag "application" %>
+  <%= aced_tag %>
+```
 
 Configuration
 -------------
 
-Config file is simple one and well commented. Just read it.
+Config file (config/initializers/aced_rails.rb) is simple one and well commented.  Edit config file to add/remove loading of corresponding javascript files for Ace themes, modes, and extensions:
 
-The main feature - you select all necessary ACE's javascripts inside config file. Gem will add them and aced-api.js in the pipeline.
+```ruby
+  config.themes = [:twilight]
+  config.modes = [:ruby, :sh, :textile, :javascript, :python]
+  config.extensions = [:searchbox, :textarea]
+  config.addons = [:bookmarklet]
+```
 
 Usage
 -----
-
-I suppose you already have configured aced.
-
-Gem provides hepler, that should be used instantly after yours javascript_include_tags:
-
-```ruby
-  aced_tag
-```
-
-Pretty simple, isn't it? This helper requires all js from configuration.
 
 The most important feature is jQuery plugin:
 
@@ -87,11 +88,10 @@ $('#post_body').aced_ta('init', {class: 'span8', theme: 'twilight', mode: 'texti
 var ace_editor_session = $(aced_div).data('aced_editor').getSession();
 ```
 
-Contributing
-------------
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+
+
+Original Docs
+-------------
+
+More documentation can be found on [ffloyd/aced_rails](https://github.com/ffloyd/aced_rails)

@@ -8,32 +8,42 @@ module AcedRails
                     :keybindings,
                     :modes,
                     :type,
-                    :uncompressed_envs
+                    :uncompressed_envs,
+                    :extensions,
+                    :addons
 
-    @@themes = @@keybindings = @@modes = []
+    @@themes = @@keybindings = @@modes = @@extensions = @@addons = []
     @@type = :normal
     @@uncompressed_envs = ['development']
 
     def self.get_assets_files
-      suffix = ''
+      prefix = 'src-min'
       if @@type == :noconflict
-        suffix = '-noconflict'
+        prefix = 'src-min-noconflict'
       end
 
       if @@uncompressed_envs.include?(Rails.env)
-        suffix += '-uncompressed'
+        prefix = 'src'
       end
 
-      result = ["aced-api.js", "jquery.random.js", "ace/ace#{suffix}.js"]
+      result = ["aced-api.js", "jquery.random.js", "ace/#{prefix}/ace.js"]
 
       @@themes.each do |theme|
-        result << "ace/theme-#{theme}#{suffix}.js"
+        result << "ace/#{prefix}/theme-#{theme}.js"
       end
       @@keybindings.each do |keybinding|
-        result << "ace/keybinding-#{keybinding}#{suffix}.js"
+        result << "ace/#{prefix}/keybinding-#{keybinding}.js"
       end
       @@modes.each do |mode|
-        result << "ace/mode-#{mode}#{suffix}.js"
+        result << "ace/#{prefix}/mode-#{mode}.js"
+      end
+      
+      @@extensions.each do |ext|
+        result << "ace/#{prefix}/ext-#{ext}.js"
+      end
+
+      @@addons.each do |addon|
+        result << "ace/ace-#{addon}.js"
       end
 
       result
